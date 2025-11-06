@@ -1,0 +1,1 @@
+FROM robotshopdevacr.azurecr.io/baseimages/redis:8.2.3-internal
