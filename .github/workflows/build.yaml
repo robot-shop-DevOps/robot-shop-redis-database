@@ -41,8 +41,6 @@ jobs:
 
       - name: Build image with Buildah
         run: |
-          pwd
-          ls -a
           buildah build -t ${{ env.IMAGE_NAME }} ./redis
           buildah tag ${{ env.IMAGE_NAME }} ${{ env.REGISTRY_URL }}/robot-shop/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.IMAGE_TAG }}
 
