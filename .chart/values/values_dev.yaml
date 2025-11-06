@@ -1,0 +1,9 @@
+labels:
+  environment: dev
+
+statefulset:
+  replicas: 1
+
+  pod:
+    nodeSelector:
+      environment: dev
