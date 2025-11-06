@@ -1,0 +1,4 @@
+apiVersion: v2
+name: redis-database
+version: 1.0.0
+description: A Helm chart for redis database k8s
