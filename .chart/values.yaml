@@ -1,0 +1,53 @@
+labels:
+  app: Redis
+  project: Robot-Shop
+  technology: Redis-Database
+  environment: default 
+
+statefulset:
+  name: redis
+
+  replicas: 1
+
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      
+  volumeClaimTemplates:
+  - metadata:
+      name: redis-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: default
+      resources:
+        requests:
+          storage: 1Gi  
+
+  pod:
+    nodeSelector:
+      project: Robot-Shop
+
+    containers:  
+    - name: redis
+
+      image: ${IMAGE}  # <-- placeholder
+
+      imagePullPolicy: Always
+
+      ports:
+      - containerPort: 6379
+
+      volumeMounts:
+      - name: redis-data
+        mountPath: /mnt/redis
+
+service:
+  name: redis-service-headless
+
+  clusterIP: None
+
+  ports:
+  - name: redis
+    port: 6379
+    targetPort: 6379
